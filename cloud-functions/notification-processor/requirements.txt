@@ -1,0 +1,2 @@
+requests==2.31.0
+google-cloud-logging==3.10.0
