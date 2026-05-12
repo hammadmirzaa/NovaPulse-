@@ -114,6 +114,21 @@ Submit a new event for real-time processing.
 }
 ```
 
+## System in Action
+
+### 1. Distributed Messaging Backbone
+![Pub/Sub Topic](docs/screenshots/pubsub-topic.png)
+*The **Pub/Sub** messaging backbone manages event distribution across the system, ensuring decoupling between the FastAPI producer and multiple downstream consumers.*
+
+### 2. Serverless API & Frontend Performance
+![Cloud Run API](docs/screenshots/cloud-run-api.png)
+![Cloud Run Frontend](docs/screenshots/cloud-run-frontend.png)
+*Both the backend API and React dashboard are hosted on **Google Cloud Run**, providing automated scaling and detailed observability metrics for request latency and container health.*
+
+### 3. Global Availability Monitoring
+![Uptime Check](docs/screenshots/uptime-check.png)
+*A **Cloud Monitoring Uptime Check** continuously verifies the health of the system from global locations (North America, Europe, Asia Pacific), ensuring high availability and low global latency.*
+
 ## Monitoring and Alerting
 
 ### Setup
