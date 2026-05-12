@@ -1,6 +1,16 @@
 # NovaPulse: Real-Time Notification System
 
-A highly scalable, event-driven notification architecture built on Google Cloud Platform. NovaPulse enables real-time event processing using FastAPI, Pub/Sub, Cloud Functions, and Google Kubernetes Engine (GKE).
+**NovaPulse** is a high-performance, event-driven infrastructure designed to handle digital events at scale. In a modern application, when a user performs an action (like signing up or placing an order), multiple systems need to react instantly—without making the user wait. NovaPulse acts as the "nervous system" for these events, ensuring they are captured, processed, and delivered reliably.
+
+## How it Works
+
+1.  **The Entry Point**: A lightweight **FastAPI** service receives events from your application. It doesn't process them immediately; instead, it hands them off to a "waiting room" (Google Cloud Pub/Sub). This ensures your main application stays fast and responsive.
+2.  **The Messenger**: **Google Cloud Pub/Sub** stores these events and broadcasts them to any system that needs to know. This "decoupled" approach means you can add new features (like sending a text message or updating a database) without ever touching your original API code.
+3.  **The Workers**: 
+    -   **Cloud Functions** act as agile scouts, instantly forwarding notifications to external webhooks.
+    -   **GKE Workers** are the heavy lifters, running in a scalable Kubernetes cluster to handle complex background processing.
+4.  **The Oversight**: **Google Cloud Monitoring** acts as a 24/7 watchtower, tracking speed and health from around the globe. If anything slows down or fails, it alerts the team immediately.
+5.  **The Control Room**: A sleek **React Dashboard** provides a real-time window into the system, allowing you to see every event as it flows through the cloud.
 
 ## Architecture
 
