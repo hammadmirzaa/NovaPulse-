@@ -5,6 +5,7 @@ This is the FastAPI backend for the Real-Time Notification System.
 ## Features
 - **FastAPI**: Modern, fast, web framework for building APIs.
 - **Pydantic**: Data validation and settings management.
+- **Google Cloud Pub/Sub**: Integrated for asynchronous event processing.
 - **Endpoints**:
   - `GET /health` - Health check.
   - `POST /api/events` - Submit a new event payload.
@@ -74,4 +75,23 @@ You can verify the health of the running container:
 
 ```bash
 docker inspect --format='{{json .State.Health.Status}}' novapulse_api
+```
+
+## Pub/Sub Configuration
+
+The application integrates with Google Cloud Pub/Sub to publish event data.
+
+### Environment Variables
+Configure the following in your `.env` file:
+- `GOOGLE_CLOUD_PROJECT`: Your GCP Project ID.
+- `PUBSUB_TOPIC_NAME`: The name of the Pub/Sub topic (default: `notification-events`).
+- `GOOGLE_APPLICATION_CREDENTIALS`: Path to your service account JSON key (only needed for production).
+
+### Local Development (Mock Mode)
+In `development` mode (set via `ENVIRONMENT` in `.env`), the application uses a mock Pub/Sub service that logs messages to the console instead of sending them to GCP. This allows you to test the API without needing GCP credentials.
+
+### Running Tests
+To run the unit tests:
+```bash
+pytest backend/tests/test_pubsub.py
 ```
