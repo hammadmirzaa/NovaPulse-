@@ -41,3 +41,37 @@ backend/
 
 The API will be available at `http://localhost:8000`. 
 Swagger UI documentation is available at `http://localhost:8000/docs`.
+
+## Docker Instructions
+
+### Prerequisites
+- Docker and Docker Compose installed on your machine.
+
+### Local Development (with Hot Reload)
+To start the application in development mode with hot reload enabled:
+
+```bash
+docker compose up --build
+```
+
+The application will be accessible at `http://localhost:8000`. Changes made to the code will automatically trigger a reload.
+
+### Production Build
+To build the production-ready image:
+
+```bash
+docker build -t novapulse-api .
+```
+
+To run the production image:
+
+```bash
+docker run -p 8000:8000 --env-file .env novapulse-api
+```
+
+### Health Check
+You can verify the health of the running container:
+
+```bash
+docker inspect --format='{{json .State.Health.Status}}' novapulse_api
+```
