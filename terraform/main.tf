@@ -124,3 +124,10 @@ resource "google_cloudfunctions2_function" "processor" {
     retry_policy   = "RETRY_POLICY_RETRY"
   }
 }
+
+resource "google_cloud_run_v2_service_iam_member" "public_access" {
+  location = google_cloud_run_v2_service.api.location
+  name     = google_cloud_run_v2_service.api.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+}
