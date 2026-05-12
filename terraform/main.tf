@@ -10,7 +10,8 @@ resource "google_project_service" "apis" {
     "container.googleapis.com",
     "run.googleapis.com",
     "artifactregistry.googleapis.com",
-    "cloudbuild.googleapis.com"
+    "cloudbuild.googleapis.com",
+    "eventarc.googleapis.com"
   ])
   service            = each.key
   disable_on_destroy = false
@@ -52,9 +53,14 @@ resource "google_cloud_run_v2_service" "api" {
   name     = "novapulse-api"
   location = var.region
 
+  depends_on = [google_project_service.apis]
+
   template {
     containers {
       image = "gcr.io/${var.project_id}/novapulse-api:latest"
+      ports {
+        container_port = 8000
+      }
       env {
         name  = "ENVIRONMENT"
         value = var.environment
@@ -88,6 +94,8 @@ resource "google_cloudfunctions2_function" "processor" {
   name        = "notification-processor"
   location    = var.region
   description = "Processes notifications from Pub/Sub"
+
+  depends_on = [google_project_service.apis]
 
   build_config {
     runtime     = "python311"
