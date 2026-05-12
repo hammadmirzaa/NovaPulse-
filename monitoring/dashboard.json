@@ -1,0 +1,62 @@
+{
+  "displayName": "NovaPulse Monitoring",
+  "dashboardFilters": [],
+  "widgets": [
+    {
+      "title": "Cloud Run Request Count",
+      "xyChart": {
+        "dataSets": [
+          {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "resource.type=\"cloud_run_revision\" metric.type=\"run.googleapis.com/request_count\""
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Cloud Run Latency",
+      "xyChart": {
+        "dataSets": [
+          {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "resource.type=\"cloud_run_revision\" metric.type=\"run.googleapis.com/request_latencies\""
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Pub/Sub Message Count",
+      "xyChart": {
+        "dataSets": [
+          {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "resource.type=\"pubsub_topic\" metric.type=\"pubsub.googleapis.com/topic/send_message_operation_count\""
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Worker Pod Status",
+      "xyChart": {
+        "dataSets": [
+          {
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "resource.type=\"k8s_container\" metric.type=\"kubernetes.io/container/restart_count\""
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

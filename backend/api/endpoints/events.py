@@ -24,8 +24,8 @@ async def create_event(event: EventPayload):
         response = await process_event(event)
         return response
     except ValueError as e:
-        logger.error(f"Validation error: {e}")
+        logger.error(f"Validation error | severity: ERROR | error: {e}")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
-        logger.error(f"Internal server error: {e}")
+        logger.error(f"Internal server error | severity: ERROR | error: {e}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="An error occurred while processing the event.")

@@ -42,19 +42,19 @@ class PubSubService:
         message_bytes = json.dumps(message_data).encode("utf-8")
         
         if self.is_mock:
-            logger.info(f"[MOCK PUB/SUB] Publishing to {self.topic_name}: {message_data}")
+            logger.info(f"Published event | severity: INFO | event_type: {event_type} | user_id: {user_id} | payload: {payload}")
             return "mock-message-id"
 
         try:
             future = self.publisher.publish(self.topic_path, message_bytes)
             message_id = future.result()
-            logger.info(f"Published message to {self.topic_name} with ID: {message_id}")
+            logger.info(f"Published event | severity: INFO | event_type: {event_type} | user_id: {user_id} | message_id: {message_id}")
             return message_id
         except exceptions.GoogleAPICallError as e:
-            logger.error(f"Failed to publish to Pub/Sub: {e}")
+            logger.error(f"Error publishing event | severity: ERROR | error: {e}")
             raise RuntimeError(f"Cloud Pub/Sub error: {e}")
         except Exception as e:
-            logger.error(f"Unexpected error publishing to Pub/Sub: {e}")
+            logger.error(f"Unexpected error | severity: ERROR | error: {e}")
             raise RuntimeError("An unexpected error occurred while publishing to Pub/Sub.")
 
 # Singleton instance

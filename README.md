@@ -53,5 +53,26 @@ Add the following secrets to your GitHub repository settings:
 - `GCP_SA_KEY`: The JSON key of a service account with permissions for Artifact Registry, Cloud Run, and GKE.
 - `GCP_REGION`: Your target GCP region (e.g., `us-central1`).
 
+## Monitoring and Alerting
+
+### Setup
+1. Define `alert_email` in `terraform/terraform.tfvars`.
+2. Apply terraform:
+   ```bash
+   terraform apply
+   ```
+
+### Dashboard
+Import `monitoring/dashboard.json` into the Google Cloud Monitoring console to visualize:
+- API Request Count and Latency.
+- Pub/Sub message flow.
+- Worker pod status.
+
+### Alerts
+The system will automatically notify `alert_email` for:
+- API 5xx errors (> 5 in 5 min).
+- Pub/Sub backlog age (> 300 seconds).
+- API health check failures.
+
 ## Development
 See individual folder READMEs for specific service instructions.
