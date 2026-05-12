@@ -38,6 +38,7 @@ graph TD
 NovaPulse/
 ├── .github/workflows/    # CI/CD pipelines
 ├── backend/              # FastAPI application
+├── frontend/             # React dashboard
 ├── cloud-functions/      # Serverless processors
 ├── worker-service/       # GKE-based background workers
 ├── terraform/            # Infrastructure as Code
@@ -111,6 +112,32 @@ Submit a new event for real-time processing.
 {
   "detail": "Missing required field: user_id"
 }
+```
+
+## Monitoring and Alerting
+
+### Setup
+1. Define `alert_email` in `terraform/terraform.tfvars`.
+2. Apply terraform:
+   ```bash
+   terraform apply
+   ```
+
+### Dashboard
+Import `monitoring/dashboard.json` into the Google Cloud Monitoring console to visualize system health.
+
+## Frontend Dashboard
+
+### Setup
+1. Navigate to `frontend/`.
+2. Install dependencies: `npm install`.
+3. Configure `VITE_API_URL` in `.env`.
+4. Run locally: `npm run dev`.
+
+### Docker
+```bash
+docker build -t novapulse-frontend .
+docker run -p 80:80 novapulse-frontend
 ```
 
 ## Contributing
